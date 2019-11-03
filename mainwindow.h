@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QDebug>
+#include <QDate>
 
 namespace Ui {
 class MainWindow;
@@ -26,10 +28,13 @@ private:
 
 private slots:
     void onRxDataFromFirstDevice();
-    void onRxDataFromSecondDevide();
-    void onRxDataFromThridDevice();
+    void onRxDataFromSecondDevice();
+    void onRxDataFromThirdDevice();
 
 
+    void on_connectBtn_clicked();
+    void on_connectBtn_2_clicked();
+    void on_connectBtn_3_clicked();
 };
 
 #endif // MAINWINDOW_H
