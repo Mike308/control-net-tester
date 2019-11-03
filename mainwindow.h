@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSerialPort>
+#include <QSerialPortInfo>
 
 namespace Ui {
 class MainWindow;

@@ -7,6 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    foreach (QSerialPortInfo serialPortInfo,  QSerialPortInfo::availablePorts()) {
+        ui->serialPorts->addItem(serialPortInfo.portName());
+        ui->serialPorts_2->addItem(serialPortInfo.portName());
+        ui->serialPorts_3->addItem(serialPortInfo.portName());
+    }
+
 
 }
 
@@ -50,10 +56,28 @@ void MainWindow::onRxDataFromFirstDevice()
 
 void MainWindow::onRxDataFromSecondDevide()
 {
+    if (secondDevice->canReadLine()) {
+        QString rxData = QString::fromLatin1(secondDevice->readLine());
+        ui->miniterminal_2->appendPlainText(rxData);
+        if (rxData.contains("+TX=")) {
+            ui->txData_2->setText(rxData.replace("+TX=", ""));
+        }else if (rxData.contains("+RX=")) {
+            ui->currentRXData_2->setText(rxData.replace("+RX=", ""));
+        }
+    }
     if (secondDevice->bytesAvailable() > 0) QMetaObject::invokeMethod(this, "onRxDataFromSecondDevice");
 }
 
 void MainWindow::onRxDataFromThridDevice()
 {
+    if (thirdDevice->canReadLine()) {
+        QString rxData = QString::fromLatin1(thirdDevice->readLine());
+        ui->miniterminal_3->appendPlainText(rxData);
+        if (rxData.contains("+TX=")) {
+            ui->txData_3->setText(rxData.replace("+TX=", ""));
+        }else if (rxData.contains("+RX=")) {
+            ui->currentRXData_3->setText(rxData.replace("+RX=", ""));
+        }
+    }
     if (thirdDevice->bytesAvailable() > 0) QMetaObject::invokeMethod(this, "onRxDataFromThirdDevice");
 }
