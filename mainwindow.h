@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSerialPort>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,17 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QSerialPort *firstDevice;
+    QSerialPort *secondDevice;
+    QSerialPort *thirdDevice;
+    void initSerialPort();
+
+private slots:
+    void onRxDataFromFirstDevice();
+    void onRxDataFromSecondDevide();
+    void onRxDataFromThridDevice();
+
+
 };
 
 #endif // MAINWINDOW_H
